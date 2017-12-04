@@ -17,7 +17,8 @@ export default class Text__View extends React.Component {
     render() {
         return (
             <div className="text-div">
-                <div>{this.state.text.text}</div>
+                <h2 className="text-title">{this.state.text.title}</h2>
+                <div className="text-text">{this.state.text.text}</div>
                 <div><input type="button" value="click" onClick={this.onDoneBtnClick}/></div>
             </div>
         );

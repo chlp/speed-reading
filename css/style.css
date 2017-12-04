@@ -1,0 +1,11 @@
+.text-div {
+    max-width: 42em;
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+    margin: 2em auto;
+    padding: 1em 2em;
+}
+
+.text-text {
+    white-space: pre-wrap;
+}

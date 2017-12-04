@@ -1,7 +1,9 @@
 export default class Text {
     constructor(obj = {
+        title: '',
         text: ''
     }) {
+        this.title = obj.title;
         this.text = obj.text;
         this.guid = this.guid();
     }

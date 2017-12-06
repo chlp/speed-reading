@@ -8,6 +8,7 @@ export default class Text__View extends React.Component {
             text: this.props.text
         };
         this.onBtnClick = this.onBtnClick.bind(this);
+        this.onWordClick = this.onWordClick.bind(this);
         this.textAsWordElements = this.textAsWordElements.bind(this);
     }
 
@@ -15,15 +16,36 @@ export default class Text__View extends React.Component {
         console.log(this.state.text.guid);
     }
 
+    onWordClick(event) {
+        let count = parseInt(event.target.dataset.count);
+        console.log(count);
+    }
+
     textAsWordElements() {
-        return this.state.text.text.replace(/([а-яА-ЯёЁ]+)/g, "<span class=\"text-word\">$1</span>");
+        let pieces = this.state.text.text.split(/([^а-яА-ЯёЁ]+)/g);
+        let count = 0;
+        pieces.forEach((piece, i) => {
+            if (/[а-яА-ЯёЁ]/.test(piece)) {
+                ++count;
+                pieces[i] =
+                    <span
+                        className="text-word"
+                        onClick={this.onWordClick}
+                        data-count={count}
+                        key={i}
+                    >
+                        {piece}
+                    </span>
+            }
+        });
+        return pieces;
     }
 
     render() {
         return (
             <div className="text-div">
                 <h2 className="text-title">{this.state.text.title}</h2>
-                <div className="text-text" dangerouslySetInnerHTML={{__html: this.textAsWordElements()}}/>
+                <div className="text-text">{this.textAsWordElements()}</div>
                 <div><input type="button" value="click" onClick={this.onBtnClick}/></div>
             </div>
         );

@@ -9,6 +9,7 @@ export default class Text__View extends React.Component {
         };
         this.onBtnClick = this.onBtnClick.bind(this);
         this.onWordClick = this.onWordClick.bind(this);
+        this.onWordOver = this.onWordOver.bind(this);
         this.textAsWordElements = this.textAsWordElements.bind(this);
     }
 
@@ -21,6 +22,22 @@ export default class Text__View extends React.Component {
         console.log(count);
     }
 
+    onWordOver(event) {
+        let count = parseInt(event.target.dataset.count);
+        $('.text-text > span').each((i, iElement) => {
+            $(iElement).addClass('text-item-hover');
+            if (parseInt(iElement.dataset.count) >= count) {
+                return false;
+            }
+        });
+    }
+
+    onWordLeave(event) {
+        $('.text-item-hover').each((i, iElement) => {
+            iElement.classList.remove('text-item-hover');
+        });
+    }
+
     textAsWordElements() {
         let pieces = this.state.text.text.split(/([^а-яА-ЯёЁ]+)/g);
         let count = 0;
@@ -31,7 +48,17 @@ export default class Text__View extends React.Component {
                     <span
                         className="text-word"
                         onClick={this.onWordClick}
+                        onMouseOver={this.onWordOver}
+                        onMouseLeave={this.onWordLeave}
                         data-count={count}
+                        key={i}
+                    >
+                        {piece}
+                    </span>
+            } else {
+                pieces[i] =
+                    <span
+                        className="text-other"
                         key={i}
                     >
                         {piece}

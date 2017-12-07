@@ -9,3 +9,16 @@
 .text-text {
     white-space: pre-wrap;
 }
+
+.text-word {
+    cursor: pointer;
+}
+
+.text-text > span {
+    transition: 1000ms;
+}
+
+.text-text > span.text-item-hover {
+    background: #1d1e1f;
+    color: white;
+}
